@@ -40,8 +40,7 @@ export function removeItem(array, index) {
 //     { name: "Barbara"}
 export function updateName(object, newName) {
   // const newObject = { ...object, object.name: newName };
-  const newObj = { ...object, name: newName };
-  return newObj;
+  return { ...object, name: newName };
 }
 
 // Immutably update the object so that the value under the "needsACupOfTea" property becomes the opposite of what it was.
@@ -50,7 +49,9 @@ export function updateName(object, newName) {
 //     toggleTeaStatus({ name: "Abe", needsACupOfTea: false })
 // should give back:
 //     { name: "Abe", needsACupOfTea: true }
-export function toggleTeaStatus(object) {}
+export function toggleTeaStatus(object) {
+  return { ...object, needsACupOfTea: !object.needsACupOfTea };
+}
 
 // Combo Time!!
 
@@ -60,4 +61,10 @@ export function toggleTeaStatus(object) {}
 //    toggleListItemCompleted([{ task: "Cooking", completed: true }, { task: "Walking", completed: false }], 1)
 // should give back:
 //    [{ task: "Cooking", completed: true }, { task: "Walking", completed: true }]
-export function toggleListItemCompleted(array, index) {}
+export function toggleListItemCompleted(array, index) {
+  return [
+    ...array.slice(0, index),
+    { ...array[index], completed: !array[index].completed },
+    ...array.slice(index + 1),
+  ];
+}
